@@ -1,1 +1,6 @@
 *.class
+*.exe
+*.dll
+*.config
+bin/
+obj/

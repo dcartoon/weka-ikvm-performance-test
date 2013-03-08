@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class Driver {
 	
-	private static final int numIterations = 5;
+	private static final int numIterations = 50;
 	private static final int percentSplit = 66;
-	private static final String trainingTimeOutput = "training_times.csv";
-	private static final String testTimeOutput = "test_times.csv";
+	private static final String trainingTimeOutput = "java_training_times.csv";
+	private static final String testTimeOutput = "java_test_times.csv";
 	
 	public static void main(String[] args) {
 		System.out.println("Starting...");
