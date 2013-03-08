@@ -1,0 +1,1 @@
+javac -classpath .;"c:\Program Files\weka-3-6\weka.jar" -d bin src\*.java
