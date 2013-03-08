@@ -13,13 +13,21 @@ import java.util.List;
  */
 public class Driver {
 	
-	private static final int numIterations = 50;
-	private static final int percentSplit = 66;
+	private static final int numIterations = 10;
+	private static final int percentSplit = 90;
 	private static final String trainingTimeOutput = "java_training_times.csv";
 	private static final String testTimeOutput = "java_test_times.csv";
+	private static final boolean useRandomForest = true;
+	private static final int numTrees = 75;
 	
 	public static void main(String[] args) {
 		System.out.println("Starting...");
+		
+		if(useRandomForest) {
+			System.out.println("Using RandomForest with numTrees=" + numTrees);
+		} else {
+			System.out.println("Using J48 Decision Tree");
+		}
 		
 		weka.core.Instances insts = null;
 		try
@@ -52,7 +60,7 @@ public class Driver {
            
            for(int i = 0; i < numIterations; i++) {
         	   long startTime = System.currentTimeMillis();
-        	   cl = new weka.classifiers.trees.J48();
+        	   cl = getClassifier();
 	       	
 	           //randomize the order of the instances in the dataset.
 	                       weka.filters.Filter myRandom = new weka.filters.unsupervised.instance.Randomize();
@@ -99,6 +107,18 @@ public class Driver {
            ex.printStackTrace();
        }
    }
+    
+    private static weka.classifiers.Classifier getClassifier()
+	{
+		if (useRandomForest)
+		{
+			weka.classifiers.trees.RandomForest forest = new weka.classifiers.trees.RandomForest();
+			forest.setNumTrees(numTrees);
+			return forest;
+		}
+
+		return new weka.classifiers.trees.J48();
+	}
    
    private static void dumpToFile(List<Long> data, String fileName) {
 	   try {

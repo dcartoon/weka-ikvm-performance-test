@@ -14,15 +14,22 @@ namespace weka_ikvm_performance_test
 	/// </summary>
 	public class Driver
 	{
-		private const int NumIterations = 50;
-		private const int PercentSplit = 66;
+		private const int NumIterations = 10;
+		private const int PercentSplit = 90;
 		private const string TrainingTimeOutput = "clr_training_times.csv";
 		private const string TestTimeOutput = "clr_test_times.csv";
+		private const bool UseRandomForest = false;
+		private const int NumTrees = 20;
 
 		public static void Main(String[] args)
 		{
 			Console.Out.WriteLine("Starting...");
 
+			if(UseRandomForest)
+				Console.Out.WriteLine("Using RandomForest with NumTrees=" + NumTrees);
+			else
+				Console.Out.WriteLine("Using J48 Decision Tree");
+			
 			weka.core.Instances insts;
 
 			try
@@ -56,8 +63,9 @@ namespace weka_ikvm_performance_test
 				for (int i = 0; i < NumIterations; i++)
 				{
 					long startTime = CurrentTimeMillis();
-					cl = new weka.classifiers.trees.J48();
 
+					cl = GetClassifier();
+					
 					//randomize the order of the instances in the dataset.
 					weka.filters.Filter myRandom = new weka.filters.unsupervised.instance.Randomize();
 					myRandom.setInputFormat(insts);
@@ -106,6 +114,18 @@ namespace weka_ikvm_performance_test
 			}
 		}
 
+		private static weka.classifiers.Classifier GetClassifier()
+		{
+			if (UseRandomForest)
+			{
+				weka.classifiers.trees.RandomForest forest = new weka.classifiers.trees.RandomForest();
+				forest.setNumTrees(NumTrees);
+				return forest;
+			}
+
+			return new weka.classifiers.trees.J48();
+		}
+		
 		private static long CurrentTimeMillis()
 		{
 			return DateTime.Now.Ticks/10000;

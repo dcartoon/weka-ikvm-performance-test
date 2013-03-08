@@ -22,14 +22,19 @@ The solution is a Visual Studio 2012 solution.  You will most likely need to upd
 ## Running - IKVM
 The code assumes that it will be run from the bin\Release directory
 
-## Results
+## Performance
 
-Testing was done on a Core i7-2600 - 3.4 GHz machine running Windows 7 and Java 1.7.0 - 64 bit.
+Testing was done on a Core i7-2600 - 3.4 GHz machine running Windows 7 and Java 1.7.0 - 64 bit.  Timed using a 90% split of data for training/test.
 
-### Java Performance
-
-The Weka Java implementation completes the training phase in ~9.6 seconds and the classification phase in ~7 ms
-
-### IKVM/C# Performance
-
-The C# implementation completes the training phase in ~34 seconds and the classification phase in ~11 ms
+Classifier				|	Operation	|	Time(Java)	|	Time(C#)
+-----------				|	---------	|	----		|	--------	
+J48						|	Training	|	17 s		|	65 s
+J48						|	Test		|	6 ms		|	3.5 ms
+RandomForest(10 trees)	|	Training	|	35 s		|	138 s
+RandomForest(10 trees)	|	Test		|	20 ms		|	41 ms
+RandomForest(20 trees)	|	Training	|	72 s		|	262 s
+RandomForest(20 trees)	|	Test		|	56 ms		|	86 ms
+RandomForest(50 trees)	|	Training	|	172 s		|	653 s
+RandomForest(50 trees)	|	Test		|	133 ms		|	238 ms
+RandomForest(75 trees)	|	Training	|	256 s		|	961 s
+RandomForest(75 trees)	|	Test		|	214 ms		|	376 ms
