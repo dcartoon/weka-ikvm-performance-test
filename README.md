@@ -24,7 +24,8 @@ The code assumes that it will be run from the bin\Release directory
 
 ## Performance
 
-Testing was done on a Core i7-2600 - 3.4 GHz machine running Windows 7 and Java 1.7.0 - 64 bit.  Timed using a 90% split of data for training/test.
+Testing was done on a Core i7-2600 - 3.4 GHz machine running Windows 7 and Java 1.7.0 - 64 bit.  Timed using a 90% split of data for training/test.  The dataset used is under data/ and is a converted form of the [UCI Census Data](http://archive.ics.uci.edu/ml/datasets/Census+Income).
+
 
 Classifier				|	Operation	|	Time(Java)	|	Time(C#)
 -----------				|	---------	|	----		|	--------	
