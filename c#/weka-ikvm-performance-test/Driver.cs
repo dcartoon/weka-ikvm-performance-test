@@ -14,11 +14,11 @@ namespace weka_ikvm_performance_test
 	/// </summary>
 	public class Driver
 	{
-		private const int NumIterations = 10;
+		private const int NumIterations = 3;
 		private const int PercentSplit = 90;
 		private const string TrainingTimeOutput = "clr_training_times.csv";
 		private const string TestTimeOutput = "clr_test_times.csv";
-		private const bool UseRandomForest = false;
+		private const bool UseRandomForest = true;
 		private const int NumTrees = 20;
 
 		public static void Main(String[] args)
@@ -102,8 +102,10 @@ namespace weka_ikvm_performance_test
 					classificationTimes.Add(endTime - startTime);
 				}
 
-				Console.Out.WriteLine("Average classification time: " + Driver.ComputeAverage(classificationTimes, true) +
-						"ms");
+				double averageTotalClassificationTime = Driver.ComputeAverage(classificationTimes, true);
+				double averageIndividualClassificationTime = averageTotalClassificationTime / testSize;
+				Console.Out.WriteLine("Average total classification time: " + averageTotalClassificationTime +
+						"ms | Average individual classification time: " + averageIndividualClassificationTime);
 
 				Driver.DumpToFile(trainingTimes, Driver.TrainingTimeOutput);
 				Driver.DumpToFile(classificationTimes, Driver.TestTimeOutput);

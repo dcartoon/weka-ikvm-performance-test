@@ -26,7 +26,6 @@ The code assumes that it will be run from the bin\Release directory
 
 Testing was done on a Core i7-2600 - 3.4 GHz machine running Windows 7 and Java 1.7.0 - 64 bit.  Timed using a 90% split of data for training/test.  The dataset used is under data/ and is a converted form of the [UCI Census Data](http://archive.ics.uci.edu/ml/datasets/Census+Income).
 
-
 Classifier				|	Operation	|	Time(Java)	|	Time(C#)
 -----------				|	---------	|	----		|	--------	
 J48						|	Training	|	17 s		|	65 s
@@ -39,3 +38,5 @@ RandomForest(50 trees)	|	Training	|	172 s		|	653 s
 RandomForest(50 trees)	|	Test		|	133 ms		|	238 ms
 RandomForest(75 trees)	|	Training	|	256 s		|	961 s
 RandomForest(75 trees)	|	Test		|	214 ms		|	376 ms
+
+*Test times above are for processing the entire test set(3257 items).  The time to classify an individual input is the test time/3257, or on the order of 0.01 ms.*

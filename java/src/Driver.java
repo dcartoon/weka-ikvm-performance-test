@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Driver {
 	
-	private static final int numIterations = 10;
+	private static final int numIterations = 3;
 	private static final int percentSplit = 90;
 	private static final String trainingTimeOutput = "java_training_times.csv";
 	private static final String testTimeOutput = "java_test_times.csv";
@@ -95,9 +95,11 @@ public class Driver {
 	           long endTime = System.currentTimeMillis();
 	           classificationTimes.add(endTime - startTime);
            }
-           
-           System.out.println("Average classification time: " + Driver.computeAverage(classificationTimes, true) + 
-        		   "ms");
+
+           double averageTotalClassificationTime = Driver.computeAverage(classificationTimes, true);
+           double averageIndividualClassificationTime = averageTotalClassificationTime/testSize;
+           System.out.println("Average total classification time: " + averageTotalClassificationTime +
+					"ms | Average individual classification time: " + averageIndividualClassificationTime);
            
            Driver.dumpToFile(trainingTimes, Driver.trainingTimeOutput);
            Driver.dumpToFile(classificationTimes, Driver.testTimeOutput);
