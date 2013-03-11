@@ -1,7 +1,7 @@
 weka-ikvm-performance-test
 ==========================
 
-Basic project to evaluate the performance of [http://www.cs.waikato.ac.nz/ml/weka/](Weka) running under the JVM versus under the CLR(using IKVM).  This code is designed to run on 
+Basic project to evaluate the performance of [Weka](http://www.cs.waikato.ac.nz/ml/weka/) running under the JVM versus under the CLR(using IKVM).  This code is designed to run on 
 
 ## Setup - Java
 
